@@ -25,7 +25,7 @@ const ChannelsPage = () => {
       }
 
       // Формируем URL с токеном
-      const url = `http://127.0.0.1:5000/api/check_auth/?token=${token}`;
+      const url = `https://petrocord.ru:5000/api/check_auth/?token=${token}`;
 
       // Отправляем GET-запрос
       const response = await fetch(url, {
@@ -52,7 +52,7 @@ const ChannelsPage = () => {
   const fetchUserChannels = async () => {
     setLoading(true); // Включаем индикатор загрузки
     try {
-      const response = await fetch("http://localhost:5000/api/rooms/user", {
+      const response = await fetch("https://petrocord.ru:5000/api/rooms/user", {
         method: "GET",
         credentials: "include", // Указываем, что куки должны быть отправлены
       });
@@ -80,7 +80,7 @@ const ChannelsPage = () => {
     if (newChannelName.trim()) {
       setLoading(true); // Включаем индикатор загрузки
       try {
-        const response = await fetch("http://localhost:5000/api/rooms", {
+        const response = await fetch("https://petrocord.ru:5000/api/rooms", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -146,10 +146,13 @@ const ChannelsPage = () => {
   const handleDeleteChannel = async (uuid) => {
     setLoading(true); // Включаем индикатор загрузки
     try {
-      const response = await fetch(`http://localhost:5000/api/rooms/${uuid}`, {
-        method: "DELETE",
-        credentials: "include", // Отправляем куки, если они нужны для авторизации
-      });
+      const response = await fetch(
+        `https://petrocord.ru:5000/api/rooms/${uuid}`,
+        {
+          method: "DELETE",
+          credentials: "include", // Отправляем куки, если они нужны для авторизации
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Не удалось удалить комнату.");

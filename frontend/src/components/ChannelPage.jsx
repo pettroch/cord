@@ -89,7 +89,7 @@ const ChannelPage = () => {
         throw new Error("Токен отсутствует");
       }
 
-      const url = `http://127.0.0.1:5000/api/check_auth/?token=${token}`;
+      const url = `https://petrocord.ru:5000/api/check_auth/?token=${token}`;
       const response = await fetch(url, {
         method: "GET",
         credentials: "include",
@@ -113,7 +113,9 @@ const ChannelPage = () => {
 
   const fetchChannel = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/rooms/${uuid}`);
+      const response = await fetch(
+        `https://petrocord.ru:5000/api/rooms/${uuid}`
+      );
       if (!response.ok) {
         throw new Error("Канал не найден");
       }
@@ -130,7 +132,7 @@ const ChannelPage = () => {
       try {
         // Проверка, есть ли уже эта комната у пользователя
         const checkResponse = await fetch(
-          `http://localhost:5000/api/rooms/check?room_id=${uuid}`,
+          `https://petrocord.ru:5000/api/rooms/check?room_id=${uuid}`,
           {
             method: "POST",
             credentials: "include",
@@ -145,7 +147,7 @@ const ChannelPage = () => {
         if (checkData.message === "Комната не найдена у пользователя.") {
           // Если комната не найдена, добавляем ее
           const addResponse = await fetch(
-            `http://localhost:5000/api/rooms/add?room_id=${uuid}`,
+            `https://petrocord.ru:5000/api/rooms/add?room_id=${uuid}`,
             {
               method: "POST",
               credentials: "include",
